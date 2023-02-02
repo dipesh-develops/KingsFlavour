@@ -57,7 +57,7 @@ const Body = () => {
             Search
           </button>
         </div>
-        {restaurant.length === 0 ? (
+        {restaurant?.length === 0 ? (
           <Shimmer />
         ) : (
           <div className="flex px-28 flex-wrap justify-evenly">
