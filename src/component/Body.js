@@ -3,20 +3,13 @@ import { restrautList } from "../contants";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-function filterData(searchText, restaurant) {
-  const filterData = restaurant.filter((rest) =>
-    rest.data.name.toLowerCase().includes(searchText)
-  );
-  return filterData;
-}
+import { filterData } from "../utils/helper";
 
 const Body = () => {
   const [restaurant, setRestaurant] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
-    console.log("rendered from useeffect");
     //api call
     getRestaurants();
   }, []);
