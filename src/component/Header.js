@@ -1,11 +1,11 @@
 import logo from "../assets/logo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import About from "./About";
 import { FaUserAlt } from "react-icons/fa";
-
+import useOnline from "../utils/useOnline";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isonline = useOnline();
   return (
     <div className="h-28 p-2 flex items-center justify-between bg-[#F8F9F9] text-lg">
       <img src={logo} className="h-full " />
@@ -28,6 +28,7 @@ const Header = () => {
         </Link>
         <li className="">Cart</li>
       </ul>
+      <h1>{isonline ? "🟢" : "🔴"}</h1>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Logout</button>
       ) : (
