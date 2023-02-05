@@ -1,31 +1,20 @@
 import RestaurantCard from "./RestaurantCard";
-import { restrautList } from "../contants";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
+import useRestaurant from "../utils/useRestaurant";
 
 const Body = () => {
-  const [restaurant, setRestaurant] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
-  useEffect(() => {
-    //api call
-    getRestaurants();
-  }, []);
-  async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    console.log(json);
-    setRestaurant(json.data?.cards[2]?.data?.data?.cards);
-    setFilterRestaurant(json.data?.cards[2]?.data?.data?.cards);
-  }
-  // if (!restaurant) return null;
   // if (filterRestaurant?.length === 0) {
   //   return <h1>No serach result found</h1>;
   // }
+  const restaurant = useRestaurant();
+  useEffect(() => {
+    setFilterRestaurant(restaurant);
+  }, [restaurant]);
 
   return (
     <>
