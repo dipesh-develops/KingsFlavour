@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import userContext from "../utils/userContext";
+
 const RestaurantCard = ({ name, cloudinaryImageId, cuisines, avgRating }) => {
+  const { user } = useContext(userContext);
   // console.log(props);
   // const { name, cloudinaryImageId } = props.rest;
   return (
@@ -13,6 +17,8 @@ const RestaurantCard = ({ name, cloudinaryImageId, cuisines, avgRating }) => {
       <h1>{name}</h1>
       <p>{cuisines.join(", ")}</p>
       <p>{avgRating + " stars"}</p>
+      <p className="text-green-600">{user.name}</p>
+      <p className="text-green-600">{user.email}</p>
     </div>
   );
 };

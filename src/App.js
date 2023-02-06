@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./component/Header";
 import Body from "./component/Body";
@@ -11,6 +11,8 @@ import Profile from "./component/Profile";
 import { lazy, Suspense } from "react";
 import About from "./component/About";
 import Shimmer from "./component/Shimmer";
+import Register from "./component/auth/Register";
+import userContext from "./utils/userContext";
 // Chunking
 // Code Splitting
 // Dynamic Bundling
@@ -21,12 +23,15 @@ import Shimmer from "./component/Shimmer";
 const Instamart = lazy(() => import("./component/Instamart"));
 
 const Layout = () => {
+  const [user, setUser] = useState({
+    name: "Dipesh Shah",
+  });
   return (
-    <>
+    <userContext.Provider value={{ user: user, setUser: setUser }}>
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </userContext.Provider>
   );
 };
 
@@ -67,6 +72,10 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
