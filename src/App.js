@@ -13,6 +13,9 @@ import About from "./component/About";
 import Shimmer from "./component/Shimmer";
 import Register from "./component/auth/Register";
 import userContext from "./utils/userContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./component/Cart";
 // Chunking
 // Code Splitting
 // Dynamic Bundling
@@ -27,11 +30,13 @@ const Layout = () => {
     name: "Dipesh Shah",
   });
   return (
-    <userContext.Provider value={{ user: user, setUser: setUser }}>
-      <Header />
-      <Outlet />
-      <Footer />
-    </userContext.Provider>
+    <Provider store={store}>
+      <userContext.Provider value={{ user: user, setUser: setUser }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </userContext.Provider>
+    </Provider>
   );
 };
 
@@ -70,6 +75,10 @@ const router = createBrowserRouter([
             <Instamart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

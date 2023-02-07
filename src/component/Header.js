@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import useOnline from "../utils/useOnline";
 import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isonline = useOnline();
   const { user } = useContext(userContext);
-  // console.log(user);
+
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="h-28 p-2 flex items-center justify-between bg-[#F8F9F9] text-lg">
@@ -30,7 +33,9 @@ const Header = () => {
         <Link to={"/instamart"}>
           <li>Instamart</li>
         </Link>
-        <li className="">Cart</li>
+        <Link to={"/cart"}>
+          <li className="">Cart- {cartItems.length}</li>
+        </Link>
       </ul>
       <h1>{isonline ? "🟢" : "🔴"}</h1>
       <p className="text-green-600">{user.name}</p>

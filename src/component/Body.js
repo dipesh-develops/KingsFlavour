@@ -4,12 +4,12 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useRestaurant from "../utils/useRestaurant";
-import userContext from "../utils/userContext";
+// import userContext from "../utils/userContext";
 
 const Body = () => {
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const { user, setUser } = useContext(userContext);
+  // const { user, setUser } = useContext(userContext);
   // if (filterRestaurant?.length === 0) {
   //   return <h1>No serach result found</h1>;
   // }
@@ -31,13 +31,13 @@ const Body = () => {
               setSearchText(e.target.value);
             }}
           />
-          <input
+          {/* <input
             className="bg-gray-100 m-3 rounded-md"
             value={user.name}
             onChange={(e) =>
               setUser({ name: e.target.value, email: "new email" })
             }
-          />
+          /> */}
           <button
             onClick={() => {
               const data = filterData(searchText, restaurant);
